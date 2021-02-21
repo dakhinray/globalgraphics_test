@@ -20,7 +20,7 @@ then
         echo "============================================================="
         echo "Running functional test."
         echo "============================================================="
-        docker run  -v ${SCRIPTPATH}/../:/globalgraphics_test/ -w /globalgraphics_test/test -it globalgraphics_test_env python3 -m behave  -f=pretty -o reports/results.json --junit --junit-directory=reports
+        docker run  -v ${SCRIPTPATH}/../:/globalgraphics_test/ -w /globalgraphics_test/test -it globalgraphics_test_env python3 -m behave  -f=pretty -o reports/test.log --junit --junit-directory=reports
         echo "Generate html report."
         docker run  -v ${SCRIPTPATH}/../:/globalgraphics_test/ -w /globalgraphics_test/test -it globalgraphics_test_env junit2html ./reports/TESTS-features.test.xml ./reports/test_result.html
         echo "-------------------------------------------------------------"
@@ -28,9 +28,9 @@ then
         echo "============================================================="
         echo "Running performence test."
         echo "============================================================="
-        docker run  -v ${SCRIPTPATH}/../:/globalgraphics_test/ -w /globalgraphics_test/test -it globalgraphics_test_env python3 -m pyinstrument ./perf_test/perf_test.py
-
-
+        docker run  -v ${SCRIPTPATH}/../:/globalgraphics_test/ -w /globalgraphics_test/test -it globalgraphics_test_env python3 -m pyinstrument ./perf_test/perf_test.py > ./reports/performence-test-result.txt
+        echo "-------------------------------------------------------------"
+        echo "Test reports at ${SCRIPTPATH}/reports"
     else
         echo "Install docker.. we need docker to run this."
     fi

@@ -10,10 +10,10 @@ from impl1 import *
 
 if __name__ == "__main__":
 
-    print("Running memry profile on impl1 :")
+    print("Running profile on \"impl1\" with parameter: \"1000\":")
     profile(impl1)(1000)
-    print("Running memry profile on impl2 :")
+    print("Running profile on \"impl2\" with parameter: \"1000\":")
     profile(impl2)(1000)
-    print("Running memry profile on impl3 :")
+    print("Running profile on \"impl3\" with parameter: \"1000\":")
     profile(impl3)(1000)
     
