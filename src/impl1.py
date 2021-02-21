@@ -20,6 +20,7 @@ def impl1(num):
             count+=1
     return count
 
+
 def impl2(num):
     # algorithm sieve_of_eratosthenes
     # input: integer upper_bound
@@ -33,6 +34,7 @@ def impl2(num):
                 primes.remove(n)
     return len(primes)
 
+
 def impl3(num):
     # algorithm brute_force
     # input: integer upper_bound
@@ -40,7 +42,7 @@ def impl3(num):
     for n in range(2, num+1):
         is_prime = True
         for d in range(2,101):
-            if d == n:
+            if d > n:
                 break
             if n % d == 0:
                 is_prime = False
