@@ -5,6 +5,9 @@ Feature: Fests for Global Graphics Software Ltd Technical Exercise
 		Then the result should be <n>
 		Examples:
 			| implementation | m | n |
+			| impl1          |-1  |0  |
+			| impl2          |-1  |0  |
+			| impl3          |-1  |0  |
 			| impl1          |0  |0  |
 			| impl2          |0  |0  |
 			| impl3          |0  |0  |
