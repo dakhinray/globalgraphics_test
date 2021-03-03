@@ -20,16 +20,20 @@ then
         echo "============================================================="
         echo "Running functional test."
         echo "============================================================="
-        docker run  --user "$(id -u):$(id -g)"  -v ${SCRIPTPATH}/../:/globalgraphics_test/ -w /globalgraphics_test/test -it globalgraphics_test_env python3 -m behave  -f=pretty -o reports/test.log --junit --junit-directory=reports
+        docker run   -v ${SCRIPTPATH}/../:/globalgraphics_test/ -w /globalgraphics_test/test -it globalgraphics_test_env python3 -m behave  -f=pretty -o reports/test.log --junit --junit-directory=reports
         echo "Generate html report."
-        docker run  --user "$(id -u):$(id -g)"  -v ${SCRIPTPATH}/../:/globalgraphics_test/ -w /globalgraphics_test/test -it globalgraphics_test_env junit2html ./reports/TESTS-features.test.xml ./reports/test_result.html
-        echo "-------------------------------------------------------------"
-        echo "Test reports at ${SCRIPTPATH}/reports"
+        docker run   -v ${SCRIPTPATH}/../:/globalgraphics_test/ -w /globalgraphics_test/test -it globalgraphics_test_env junit2html ./reports/TESTS-features.test.xml ./reports/test_result.html
         echo "============================================================="
-        echo "Running performence test."
+        echo "Running performence test memmemory_profiler."
         echo "============================================================="
-        docker run  --user "$(id -u):$(id -g)"  -v ${SCRIPTPATH}/../:/globalgraphics_test/ -w /globalgraphics_test/test -it globalgraphics_test_env python3 -m pyinstrument ./perf_test/perf_test.py > ./reports/performence-test-result.txt
-        echo "-------------------------------------------------------------"
+        docker run   -v ${SCRIPTPATH}/../:/globalgraphics_test/ -w /globalgraphics_test/test -it globalgraphics_test_env python3 ./perf_test/perf_test.py > ./reports/performence-test-result.txt
+        echo "============================================================="
+        echo "Running performence test pyinstrument."
+        echo "============================================================="
+        docker run   -v ${SCRIPTPATH}/../:/globalgraphics_test/ -w /globalgraphics_test/test -it globalgraphics_test_env python3 -m pyinstrument -r html -o reports/time_test_impl1_log.html ./perf_test/time_test_impl1.py
+        docker run   -v ${SCRIPTPATH}/../:/globalgraphics_test/ -w /globalgraphics_test/test -it globalgraphics_test_env python3 -m pyinstrument -r html -o reports/time_test_impl2_log.html ./perf_test/time_test_impl2.py
+        docker run   -v ${SCRIPTPATH}/../:/globalgraphics_test/ -w /globalgraphics_test/test -it globalgraphics_test_env python3 -m pyinstrument -r html -o reports/time_test_impl3_log.html ./perf_test/time_test_impl3.py
+
         echo "Test reports at ${SCRIPTPATH}/reports"
     else
         echo "Install docker.. we need docker to run this."
